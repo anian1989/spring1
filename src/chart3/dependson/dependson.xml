@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="  
+http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+http://www.springframework.org/schema/context                http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+ 
+ 	<!-- 初始化方法  和销毁方法-->
+	<bean id="resourceBean" class="chart3.dependson.ResourcBean"
+		init-method="init" destroy-method="destroy">
+		<property name="file" value="D:/test.txt"></property>
+	</bean>
+	
+	<bean id="dependentBean" class="chart3.dependson.DependentBean"
+		init-method="init" destroy-method="destroy" depends-on="resourceBean">
+		<property name="bean" ref="resourceBean"></property>
+	</bean>
+	
+
+</beans>

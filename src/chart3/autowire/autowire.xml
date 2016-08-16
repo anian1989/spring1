@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="  
+http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+http://www.springframework.org/schema/context                http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName"><!-- 注意此处的全局自动装配方式 -->
+
+	<!-- 自动装配 byName -->
+	<bean id="helloApi33" class=" chart3.autowire.HelloApiImpl"></bean>
+	<bean id="bean" class="chart3.autowire.HelloApiDecorator"
+		autowire="byName"></bean>
+	<!-- 自动装配 byType 之单一实体 -->
+	<!-- 从自动装配候选者中去除 -->
+	<bean class="chart3.autowire.HelloApiImpl" />
+	<!-- 根据类型找到多个Bean时，对于集合类型（如List、Set）将注入所有匹配的候选者，而对于其他类型遇到这种 情况可能需要使用“autowire-candidate”属性为false来让指定的Bean放弃作为自动装配的候选者，或使用 
+		“primary”属性为true来指定某个Bean为首选Bean -->
+	<bean class="chart3.autowire.HelloApiImpl" autowire-candidate="false" />
+	<bean class="chart3.autowire.HelloApiImpl" primary="true" />
+	<bean id="byType" class="chart3.autowire.HelloApiDecorator"
+		autowire="byType"></bean>
+
+	<!-- 通过设置Bean定义属性autowire="constructor"，功能和“byType”功能一样，根据类 型注入构造器参数，只是用于构造器注入方式 -->
+	<bean id="byConstructor" class="chart3.autowire.HelloApiDecorator"
+		autowire="constructor"></bean>
+
+</beans>
